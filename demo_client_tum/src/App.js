@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { BrowserRouter, Route, Switch} from 'react-router-dom'
 import Test from './component/Test'
 import Home from './component/Home'
+import Notpage from './component/404Notpage'
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
           <Route exact path="/" component={ Test }/>
           <Route  path="/home" component={ Home }/>
           <Route  path="/home/ddd" component={ Test }/>
+          <Route/>
           </Switch>
     </div>
     </BrowserRouter>
