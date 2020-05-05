@@ -22,7 +22,7 @@ db.once("open", (callback) =>{
     console.log("connection succeded")
 })
 
-var whiteListHost = ['http://localhost:8080']
+var whiteListHost = ['http://localhost:8080','http://localhost:3000']
 const corsOptions = {
   origin: function (origin, callback) {
       if (whiteListHost.indexOf(origin) !== -1 || !origin) {
