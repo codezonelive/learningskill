@@ -6,7 +6,7 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 
 
-const port = 3000
+const port = 3002
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -20,7 +20,21 @@ db.on("nperror", console.log.bind(console, "connection error"))
 db.once("open", (callback) =>{
     console.log("connection succeded")
 })
+var whiteListHost = ['http://localhost:8080','http://localhost:3000']
+const corsOptions = {
+  origin: function (origin, callback) {
+      if (whiteListHost.indexOf(origin) !== -1 || !origin) {
+          callback(null, true); // ALLOW CORS
+      } else {
+          callback('Forbidden (not allowed by CORS) ', false); // BLOCKED BY CORS
+      }
+  },
+  allowedHeaders: ['Origin', 'X-Requested-With', 'X-CSRF-TOKEN', 'Content-Type', 'Accept', 'Authorization','x-www-form-urlencoded'],
+  credentials: true,
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
 
+app.use(cors(corsOptions))
 //
 const {ObjectId} = require('mongoose').Types
 const testmodel = require('./models/Test')
